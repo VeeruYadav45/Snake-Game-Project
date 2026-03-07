@@ -3,7 +3,7 @@
 #include <conio.h>
 #include <time.h>
 #include <windows.h>
-#include "gamePlay.c"ws
+#include "gamePlay.c"
 #include "auth.c"
 
 int main(){
