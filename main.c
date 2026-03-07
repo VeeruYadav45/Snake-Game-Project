@@ -5,9 +5,11 @@
 #include <windows.h>
 #include "gamePlay.c"
 #include "homePage.c"
+#include "auth.c"
 
 int main(){
-    home();
-    game();
+    char name[50];
+    login(name);
+    game(name);
     return 0;
 }
