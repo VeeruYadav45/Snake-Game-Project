@@ -74,36 +74,41 @@ void game(char *name)
     int *x, *y, px = ((rand() % 57) * 2) + 3, py = (rand() % 27) + 1, len = 1;
     char c, l;
     clock_t t;
+    int speed =250;
+    int r=1;
 
     x = (int *)malloc(len * sizeof(int) * (len + 1));
     y = (int *)malloc(len * sizeof(int) * (len + 1));
     x[0] = 25;
     y[0] = 20;
 
+    gotoxy(102, 1);
+    printf("s c o r e : 0 0");
+    
     gotoxy(px, py);
     printf("%c", 254);
 
     gotoxy(x[0], y[0]);
-    printf("%c", 153);
+    printf("%c", 154);
 
     while (1)
     {
         do
         {
             t = clock();
-            while (clock() < t + 250 && !kbhit())
+            while (clock() < t + speed && !kbhit())
                 ;
-            if (clock() < t + 250)
+            if (clock() < t + speed)
             {
                 c = getch();
-                if (c == 75 && l == 77)
-                    c = 77;
-                else if (c == 77 && l == 75)
-                    c = 75;
-                else if (c == 72 && l == 80)
-                    c = 80;
-                else if (c == 80 && l == 72)
-                    c = 72;
+                if (c == 'a' && l == 'd')
+                    c = 'd';
+                else if (c == 'd' && l == 'a')
+                    c = 'a';
+                else if (c == 'w' && l == 's')
+                    c = 's';
+                else if (c == 's' && l == 'w')
+                    c = 'w';
             }
             switch (c)
             {
@@ -111,28 +116,29 @@ void game(char *name)
                 break;
             case 13:
                 break;
-            case 80:
+            case 's':
                 move(x, y, &l, c, len);
                 gotoxy(x[0], ++y[0]);
+
                 printf("%c", 153);
                 if (y[0] >= 28)
                     over(x[0], y[0], len, name);
                 break;
-            case 72:
+            case 'w':
                 move(x, y, &l, c, len);
                 gotoxy(x[0], --y[0]);
                 printf("%c", 153);
                 if (y[0] <= 0)
                     over(x[0], y[0], len, name);
                 break;
-            case 75:
+            case 'a':
                 move(x, y, &l, c, len);
                 gotoxy(x[0] = x[0] - 2, y[0]);
                 printf("%c", 153);
                 if (x[0] <= 0)
                     over(x[0], y[0], len, name);
                 break;
-            case 77:
+            case 'd':
                 move(x, y, &l, c, len);
                 gotoxy(x[0] = x[0] + 2, y[0]);
                 printf("%c", 153);
@@ -154,6 +160,12 @@ void game(char *name)
         Beep(400, 500);
         printf("o");
         len++;
+
+        gotoxy(114, 1);
+        printf("%d %d",(len-1)/10,(len-1)%10);
+
+
+        if(speed!=100)speed-=10;
 
         x = (int *)realloc(x, sizeof(int) * (len + 1));
         y = (int *)realloc(y, sizeof(int) * (len + 1));
@@ -189,7 +201,7 @@ void over(int x, int y, int len, char *name)
         boundary();
         game(name);
     }
-    else if (c == 'N' || c == 'n')
+    else if(c=='N'||c=='n')
     {
         exit(0);
     }

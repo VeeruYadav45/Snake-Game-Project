@@ -82,7 +82,7 @@ void showLeaderboard()
                 strcpy(names[j + 1], t);
             }
 
-    printf("\n=== LEADERBOARD ===\n");
+    printf("\n%c=== LEADERBOARD ===\n",179);
     for (int i = 0; i < count && i < 5; i++)
-        printf("%d. %s - %d\n", i + 1, names[i], scores[i]);
+        printf("%c%d. %s - %d\n",179, i + 1, names[i], scores[i]);
 }
